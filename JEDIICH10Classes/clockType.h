@@ -1,4 +1,5 @@
 #pragma once
+
 class clockType {
 private:
 	int hr;
@@ -14,8 +15,10 @@ public:
 
 	// you need both set and get functions
 	// you don't want to give names to the variables because these are classes, we need them to be generic
-	// we declare these functions below main
 	void set_time(int, int, int); // sets the time
+	// time is set according to parameters
+	// postcondition: hr = hrs, min = minutes, sec = seconds
+	// checks all of those values to see if they're valid, and if not then it's set to 0
 	void get_time(int, int, int); // gets the time
 	void print_time() const; // prints the time
 
