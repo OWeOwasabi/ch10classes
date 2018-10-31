@@ -19,7 +19,7 @@ public:
 	void get_time(int, int, int); // gets the time
 	void print_time() const; // prints the time
 
-							 // our increment functions increment the time and then display the new one
+	// our increment functions increment the time and then display the new one
 	void increment_hours();
 	void increment_mins();
 	void increment_secs();
