@@ -117,6 +117,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\JEDII%27s Media\Learning to C++\Practice\JEDIICH10Classes\JEDIICH10Classes\Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\JEDII%27s Media\Learning to C++\Practice\JEDIICH10Classes\JEDIICH10Classes\clockType.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
