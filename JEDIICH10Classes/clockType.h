@@ -48,4 +48,5 @@ public:
 	void military_to_12(); // converts the current clock format to 12-hr format
 	// post condition: hr cannot be greater than 12 or equal to 0, and an am-pm format is assigned
 	void twelve_to_military(); // converts the current clock format to military format
+	// post condition: hr can range from 0-24, and the am-pm format becomes unneccessary
 };

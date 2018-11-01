@@ -42,6 +42,11 @@ int main() {
 	cout << "Now convert it back to military format. It should show 00:01:05" << endl;
 	testClock.twelve_to_military(); // call our function for converting 12hr to military
 	testClock.print_time(); // print our new time
+	// now test our remaining_time() function
+	// we're going to readjust testClock for easier math
+	cout << "We've set our testClock to 23:30:49, and it should show there are 1751 seconds left in the day" << endl;
+	testClock.set_time(23, 30, 49);
+	cout << testClock.remaining_time() << endl;
 
 	system("pause");
 	return 0;

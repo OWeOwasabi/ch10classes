@@ -94,6 +94,9 @@ void clockType::increment_hours() {
 }
 
 int clockType::elapsed_time() {
+	bool twelveHrAtStart = is12hr; // keep track of whether it was 12hr format or not at the beginning of this function
+	twelve_to_military(); // convert it to military time if it's not already
+
 	// declare our variables for keeping track of our math
 	int minutesElapsed, minutesTotal; // elapsed is our totals before the addition, total is the total after addition
 	int secondsElapsed, secondsTotal;
@@ -109,6 +112,8 @@ int clockType::elapsed_time() {
 	// 2. add that to the number of our seconds
 	secondsElapsed = minutesTotal * 60; // get the number of seconds shown by the minutes
 	secondsTotal = secondsElapsed + sec; // total all of our seconds
+
+	if (twelveHrAtStart) military_to_12(); // convert it back to 12hr format if it was before this function ran
 
 	return secondsTotal; // return our total number of seconds
 }
@@ -148,5 +153,20 @@ int clockType::remaining_time() {
 	bool twelveHrAtStart = is12hr; // create a variable for remembering if the clock is in 12 hr format
 	twelve_to_military(); // convert the clock to military time, if it isn't already
 
+	int secsLeft = 0; // create a variable for storing how many seconds are left in that day
 
+	// a new day starts at 00:00:00
+	// start by subtracting the seconds from 60 first
+	secsLeft = 60 - sec;
+	// then subtracting minutes from 59, then converting that to seconds
+	int minsLeft = 59 - min;
+	secsLeft += minsLeft * 60;
+	// then subtract hours from 23, then convert that to minutes then seconds
+	int hrsLeft = 23 - hr;
+	minsLeft = hrsLeft * 60;
+	secsLeft += minsLeft * 60;
+
+	if (twelveHrAtStart) military_to_12(); // if it was in 12hr format before this function ran, convert it back
+
+	return secsLeft; // return how many seconds are left in the day
 }
