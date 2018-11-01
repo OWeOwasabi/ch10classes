@@ -48,6 +48,12 @@ int main() {
 	testClock.set_time(23, 30, 49);
 	cout << testClock.remaining_time() << endl;
 
+	// test the compare_time() function
+	cout << "myClock is set to 22:53:39, yours is set to 20:52:38. the difference between them should be 2:01:01" << endl;
+	myClock.set_time(22, 53, 39);
+	yourClock.set_time(20, 52, 38);
+	myClock.compare_time(yourClock);
+
 	system("pause");
 	return 0;
 }

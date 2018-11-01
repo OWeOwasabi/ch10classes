@@ -71,21 +71,23 @@ void clockType::compare_time(clockType otherClock) {
 	else diffInSecs = otherTime - ourTime; // otherwise, subtract our seconds from theirs
 
 	// determine how many minutes can come out of our seconds
-	int diffInMin;
+	int diffInMin = 0;
 	while (diffInSecs > 59) { // use a while loop to make sure we don't take away too many minutes
 		diffInSecs -= 60; // subtract one minute from seconds
 		diffInMin++; // increment diffInMin for each minute we take away
 	}
 
 	// determine how many hours can come out of our minutes
-	int diffInHrs;
+	int diffInHrs = 0;
 	while (diffInMin > 59) {
 		diffInMin -= 60;
 		diffInHrs++;
 	}
 
 	// show the user what the difference between the two times is
-	cout << "The difference between the two times is " << diffInHrs << " hours, " << diffInMin << " minutes, and " << diffInSecs << " seconds." << endl;
+	clockType tempClock(diffInHrs, diffInMin, diffInSecs);
+	cout << "The difference between the two times is " << endl;
+	tempClock.print_time();
 }
 
 void clockType::increment_secs() {
