@@ -39,6 +39,8 @@ public:
 	// this function checks to see if the clock that's passed to it is the same as it's own clock
 	bool equal_time(const clockType&) const; // mark clockType as constant because it's going in by reference
 	// post condition: true if they are equal, false otherwise
+	void compare_time(clockType); // determines how far apart in time two clocks are
+	// post condition: returns in hh:mm:ss how far apart they are
 
 	int elapsed_time(); // shows how much time has already been elapsed in seconds
 	// post condition: the number of seconds elapsed that day

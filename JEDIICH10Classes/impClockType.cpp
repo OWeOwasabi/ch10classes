@@ -60,6 +60,34 @@ bool clockType::equal_time(const clockType& otherClock) const { // mark clockTyp
 	return (hr == otherClock.hr && min == otherClock.min && sec == otherClock.sec); // return true if everything is equal
 }
 
+void clockType::compare_time(clockType otherClock) {
+	// get the time in seconds from our two clocks
+	int ourTime = elapsed_time();
+	int otherTime = otherClock.elapsed_time();
+
+	// determine which one is bigger and do some math
+	int diffInSecs;
+	if (ourTime > otherTime) diffInSecs = ourTime - otherTime; // if our time is bigger, subtract their seconds from ours
+	else diffInSecs = otherTime - ourTime; // otherwise, subtract our seconds from theirs
+
+	// determine how many minutes can come out of our seconds
+	int diffInMin;
+	while (diffInSecs > 59) { // use a while loop to make sure we don't take away too many minutes
+		diffInSecs -= 60; // subtract one minute from seconds
+		diffInMin++; // increment diffInMin for each minute we take away
+	}
+
+	// determine how many hours can come out of our minutes
+	int diffInHrs;
+	while (diffInMin > 59) {
+		diffInMin -= 60;
+		diffInHrs++;
+	}
+
+	// show the user what the difference between the two times is
+	cout << "The difference between the two times is " << diffInHrs << " hours, " << diffInMin << " minutes, and " << diffInSecs << " seconds." << endl;
+}
+
 void clockType::increment_secs() {
 	if (sec + 1 < 60) { // make sure that incrementing seconds doesn't equal 60
 		sec++; // increment seconds
@@ -118,6 +146,28 @@ int clockType::elapsed_time() {
 	return secondsTotal; // return our total number of seconds
 }
 
+int clockType::remaining_time() {
+	bool twelveHrAtStart = is12hr; // create a variable for remembering if the clock is in 12 hr format
+	twelve_to_military(); // convert the clock to military time, if it isn't already
+
+	int secsLeft = 0; // create a variable for storing how many seconds are left in that day
+
+	// a new day starts at 00:00:00
+	// start by subtracting the seconds from 60 first
+	secsLeft = 60 - sec;
+	// then subtracting minutes from 59, then converting that to seconds
+	int minsLeft = 59 - min;
+	secsLeft += minsLeft * 60;
+	// then subtract hours from 23, then convert that to minutes then seconds
+	int hrsLeft = 23 - hr;
+	minsLeft = hrsLeft * 60;
+	secsLeft += minsLeft * 60;
+
+	if (twelveHrAtStart) military_to_12(); // if it was in 12hr format before this function ran, convert it back
+
+	return secsLeft; // return how many seconds are left in the day
+}
+
 void clockType::military_to_12() {
 	if (is12hr == false) { // we only want to do this if it's not already in 12 hr format
 		if (hr > 12) { // check to see if the number for hours is greater than 12
@@ -149,24 +199,3 @@ void clockType::twelve_to_military() {
 	}
 }
 
-int clockType::remaining_time() {
-	bool twelveHrAtStart = is12hr; // create a variable for remembering if the clock is in 12 hr format
-	twelve_to_military(); // convert the clock to military time, if it isn't already
-
-	int secsLeft = 0; // create a variable for storing how many seconds are left in that day
-
-	// a new day starts at 00:00:00
-	// start by subtracting the seconds from 60 first
-	secsLeft = 60 - sec;
-	// then subtracting minutes from 59, then converting that to seconds
-	int minsLeft = 59 - min;
-	secsLeft += minsLeft * 60;
-	// then subtract hours from 23, then convert that to minutes then seconds
-	int hrsLeft = 23 - hr;
-	minsLeft = hrsLeft * 60;
-	secsLeft += minsLeft * 60;
-
-	if (twelveHrAtStart) military_to_12(); // if it was in 12hr format before this function ran, convert it back
-
-	return secsLeft; // return how many seconds are left in the day
-}
