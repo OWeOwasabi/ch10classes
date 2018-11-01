@@ -6,6 +6,10 @@ private:
 	int min;
 	int sec;
 
+	char timeOfDay = ' ';
+
+	bool is12hr = false;
+
 public:
 	// these are our class constructors
 	// normally in c++ they go on the bottom?
@@ -35,4 +39,13 @@ public:
 	// this function checks to see if the clock that's passed to it is the same as it's own clock
 	bool equal_time(const clockType&) const; // mark clockType as constant because it's going in by reference
 	// post condition: true if they are equal, false otherwise
+
+	int elapsed_time(); // shows how much time has already been elapsed in seconds
+	// post condition: the number of seconds elapsed that day
+	int remaining_time(); // shows how much time the day has left in seconds
+	// post condition: the number of seconds the day has left
+
+	void military_to_12(); // converts the current clock format to 12-hr format
+	// post condition: hr cannot be greater than 12 or equal to 0, and an am-pm format is assigned
+	void twelve_to_military(); // converts the current clock format to military format
 };

@@ -29,6 +29,19 @@ int main() {
 	cout << endl;
 	myClock.set_time(17, 59, 59);
 	myClock.increment_secs();
+	
+	// check to see if our elapsed time function is working properly
+	cout << endl << "A testClock has been set to 00:01:05, and should display that there are 65 seconds in the day elapsed." << endl;
+	clockType testClock(0, 1, 5); // declare our clock for testing
+	cout << testClock.elapsed_time() << endl;
+	// check to see if our military to 12 function is working
+	cout << "Now we're going to convert our clock to 12hr format. It should show 12:01:05 am" << endl;
+	testClock.military_to_12(); // call our function for converting military time to 12 hr time
+	testClock.print_time(); // now print the new time
+	// check to see if our 12 to military function is working
+	cout << "Now convert it back to military format. It should show 00:01:05" << endl;
+	testClock.twelve_to_military(); // call our function for converting 12hr to military
+	testClock.print_time(); // print our new time
 
 	system("pause");
 	return 0;
